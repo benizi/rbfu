@@ -1,4 +1,4 @@
-#compdef rbfu
+#compdef rbfu rbfu-env
 local -a versions
 versions=( ~/.rbfu/rubies/*(N-/:t) )
 versions=( @$^versions )
