@@ -76,7 +76,9 @@ _rbfu_activate () {
   info "$MSG ($SOURCE)"
 
   # execute command, if given
-  [ -n "$COMMAND" ] && eval $COMMAND
+  if [ -n "$COMMAND" ]; then
+    eval $COMMAND
+  fi
 }
 
 
