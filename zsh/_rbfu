@@ -1,11 +1,13 @@
 #compdef rbfu rbfu-env
 local ruby version
-local -a versions real
+local -a versions system_ruby real
 for ruby in ~/.rbfu/rubies/*(N-/) ; do
   version=@$ruby:t
   real=( $ruby(:A:t) )
   versions+=( $version:$real )
 done
+system_ruby=( ${path/*rbfu*}/ruby(N) )
+(( $#system_ruby )) && versions+=( @system:$system_ruby[1] )
 _arguments \
   "1:version:((\$versions))" \
   '(-):command: _command_names -e' \
