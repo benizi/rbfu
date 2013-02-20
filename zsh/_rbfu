@@ -1,7 +1,7 @@
 #compdef rbfu rbfu-env
 local ruby version
 local -a versions system_ruby real
-for ruby in ~/.rbfu/rubies/*(N-/) ; do
+for ruby in ${rbfu_dir:-~/.rbfu}/rubies/*(N-/) ; do
   version=@$ruby:t
   real=( $ruby(:A:t) )
   versions+=( $version:$real )

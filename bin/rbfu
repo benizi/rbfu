@@ -26,7 +26,7 @@ deactivate_previous_ruby_version () {
 
 _rbfu_activate () {
   local VERSION COMMAND MSG SOURCE
-  local RBFU_ROOT="$HOME/.rbfu"
+  local RBFU_ROOT=${rbfu_dir:-$HOME/.rbfu}
   local RUBIES_ROOT="$RBFU_ROOT/rubies"
 
   # Run-time configuration
@@ -98,9 +98,10 @@ alias rbfu-env="source rbfu"
 
 if [ -n "\$BASH_VERSION" ]; then
   _rbfu_complete_version() {
-    if [ -d "$HOME/.rbfu/rubies" ]; then
+    local RBFU_ROOT="${rbfu_dir:-$HOME/.rbfu}"
+    if [ -d "$RBFU_ROOT/rubies" ]; then
       cur="\${COMP_WORDS[COMP_CWORD]}"
-      opts=\$(ls $HOME/.rbfu/rubies | sed -e "s/^/@/")
+      opts=\$(ls $RBFU_ROOT/rubies | sed -e "s/^/@/")
 
       if [[ \$COMP_CWORD == 1 ]]; then
         COMPREPLY=( \$(compgen -W "\${opts} @system" -- \${cur}) )
@@ -114,7 +115,7 @@ if [ -n "\$BASH_VERSION" ]; then
 fi
 
 if [ -n "\$ZSH_VERSION" ]; then
-  fpath=( ~/.rbfu/zsh \$fpath )
+  fpath=( ${rbfu_dir:-~/.rbfu}/zsh \$fpath )
 fi
 
 EOD
